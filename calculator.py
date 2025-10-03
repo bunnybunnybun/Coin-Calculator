@@ -1,12 +1,12 @@
 import FreeSimpleGUI as sg
 
 layout = [
-    [sg.Text("Calculate how many coins ya got with this calculator, so that you don't have to use your brain!")],
-    [sg.Input("", key = "input1"), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], key = "spin"), sg.Input("", key = "input2")],
-    [sg.Button("Calculate!!!", key = "calculate"), sg.Text("Result:", key = "result")]
+    [sg.Text("Calculate how many coins ya got with this calculator, so that you don't have to use your brain!", font="default 11", text_color=('black'), background_color='#FFFFFF')],
+    [sg.Input(key = "input1", size=15), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], key = "spin"), sg.Input( key = "input2", size=15)],
+    [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", text_color=('black'), background_color=('white'), key = "result")]
 ]
 
-window = sg.Window('Calculator', layout)
+window = sg.Window('Calculator', layout, background_color='#FFFFFF')
 
 while True:
     event, values = window.read()
@@ -32,5 +32,5 @@ while True:
 
     if event == sg.WIN_CLOSED:
         break
-
+    
 window.close()
