@@ -15,7 +15,9 @@ layout = [
 
 window = sg.Window('Calculator', layout, background_color='#FFFFFF')
 
-
+result = "AAAHHH"
+convresult = "AAAHHH"
+didcalculate = False
 his1 = "Empty"
 his2 = "Empty"
 his3 = "Empty"
@@ -26,34 +28,47 @@ while True:
     event, values = window.read()
     #f"{float(values["cinput"]) * 1.3967}"
     if event == "convcalculate":
+        didcalculate = True
         ctype1 = str(values["ctype1"])
         ctype2 = str(values["ctype2"])
         try:
             if ctype1 == "USD" and ctype2 == "USD":
                 window["convresult"].update(f"{float(values["cinput"])}")
+                calculation = f"{float(values["cinput"])} USD to USD = {float(values["cinput"])} USD"
             elif ctype1 == "USD" and ctype2 == "CAD":
                 window["convresult"].update(f"{float(values["cinput"]) * 1.3967}")
+                calculation = f"{float(values["cinput"])} USD to CAD = {float(values["cinput"]) * 1.3967} CAD"
             elif ctype1 == "CAD" and ctype2 == "CAD":
                 window["convresult"].update(f"{float(values["cinput"])}")
+                calculation = f"{float(values["cinput"])} CAD to CAD = {float(values["cinput"])} CAD"
             elif ctype1 == "CAD" and ctype2 == "USD":
                 window["convresult"].update(f"{float(values["cinput"]) * 0.7160}")
+                calculation = f"{float(values["cinput"])} CAD to USD = {float(values["cinput"]) * 0.7160} USD"
             elif ctype1 == "USD" and ctype2 == "EUR":
                 window["convresult"].update(f"{float(values["cinput"]) * 0.8520}")
+                calculation = f"{float(values["cinput"])} USD to EUR = {float(values["cinput"]) * 0.8520} EUR"
             elif ctype1 == "EUR" and ctype2 == "USD":
                 window["convresult"].update(f"{float(values["cinput"]) * 1.1738}")
+                calculation = f"{float(values["cinput"])} EUR to USD = {float(values["cinput"]) * 1.1738} USD"
             elif ctype1 == "CAD" and ctype2 == "EUR":
                 window["convresult"].update(f"{float(values["cinput"]) * 0.6100}")
+                calculation = f"{float(values["cinput"])} CAD to EUR = {float(values["cinput"]) * 0.6100} EUR"
             elif ctype1 == "EUR" and ctype2 == "CAD":
                 window["convresult"].update(f"{float(values["cinput"]) * 1.6393}")
+                calculation = f"{float(values["cinput"])} EUR to CAD = {float(values["cinput"]) * 1.6393} CAD"
             elif ctype1 == "EUR" and ctype2 == "EUR":
                 window["convresult"].update(f"{float(values["cinput"])}")
+                calculation = f"{float(values["cinput"])} EUR to EUR = {float(values["cinput"])} EUR"
             else:
                 window["convresult"].update("A critical error has occurred :(")
+                didcalculate = False
         except ValueError:
             window["convresult"].update("Result: Please enter valid numbers")
+            didcalculate = False
 
     if event == "calculate":
         try:
+            didcalculate = True
             input1 = float(values["input1"])
             input2 = float(values["input2"])
             if values["spin"] == "Plus":
@@ -70,31 +85,36 @@ while True:
                 calculation = f"{float(input1)} / {float(input2)} = {result}"
             else:
                 result = "A critical error has occurred :("
+                didcalculate = False
             window["result"].update(f"Result: {result}")
-            if result != "A critical error has occurred :(":
-                window["history5"].update(f"{his4}")
-                his5 = his4
-                window["history4"].update(f"{his3}")
-                his4 = his3
-                window["history3"].update(f"{his2}")
-                his3 = his2
-                window["history2"].update(f"{his1}")
-                his2 = his1
-                window["history1"].update(f"{calculation}")
-                his1 = calculation
-            if his1 != "Empty":
-                window["history1"].update(text_color=("black"))
-            if his2 != "Empty":
-                window["history2"].update(text_color=("black"))
-            if his3 != "Empty":
-                window["history3"].update(text_color=("black"))
-            if his4 != "Empty":
-                window["history4"].update(text_color=("black"))
-            if his5 != "Empty":
-                window["history5"].update(text_color=("black"))
+            
         except ValueError:
             window["result"].update("Result: Please enter valid numbers")
+            didcalculate = False
 
+    if result != "A critical error has occurred :(" and convresult != "A critical error has occurred :(" and didcalculate == True:
+        window["history5"].update(f"{his4}")
+        his5 = his4
+        window["history4"].update(f"{his3}")
+        his4 = his3
+        window["history3"].update(f"{his2}")
+        his3 = his2
+        window["history2"].update(f"{his1}")
+        his2 = his1
+        window["history1"].update(f"{calculation}")
+        his1 = calculation
+        if his1 != "Empty":
+            window["history1"].update(text_color=("black"))
+        if his2 != "Empty":
+            window["history2"].update(text_color=("black"))
+        if his3 != "Empty":
+            window["history3"].update(text_color=("black"))
+        if his4 != "Empty":
+            window["history4"].update(text_color=("black"))
+        if his5 != "Empty":
+            window["history5"].update(text_color=("black"))
+
+    didcalculate = False
 
     if event == sg.WIN_CLOSED:
         break

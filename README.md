@@ -1,7 +1,10 @@
 # Coin-Calculator and currency converter
-A calculator! How fun! Intended for people like me who don't want to use their brains. Use it to calculate how many coins ya got!
+A calculator! How fun! Intended for people like me who don't want to use their brains. Use it to calculate how many coins ya got! Also convert currencies with the currency converter!
 
-Also a currency converter! Currently supports converting between USD, CAD and EUR. More may be added soon.
+# Features:
+ - Simple calculator, able to do addition, subtraction, multiplication and division.
+ - Currency converter that can convert between USD, CAD and EUR. (more may be added soon)
+ - History; shows the last 5 calculations you have done, whether it was done with the calculator or the converter.
 
 # Dependencies:
 FreeSimpleGUI, https://github.com/spyoungtech/FreeSimpleGUI
