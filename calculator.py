@@ -14,6 +14,7 @@ layout = [
 
 window = sg.Window('Calculator', layout, background_color='#FFFFFF')
 
+
 his1 = "Empty"
 his2 = "Empty"
 his3 = "Empty"
@@ -32,13 +33,13 @@ while True:
                 calculation = f"{float(input1)} + {float(input2)} = {result}" # calculation is used for the history
             elif values["spin"] == "Minus":
                 result = float(input1) - float(input2)
-                calculation = f"{float(input1)} + {float(input2)} = {result}"
+                calculation = f"{float(input1)} - {float(input2)} = {result}"
             elif values["spin"] == "Multiplied by":
                 result = float(input1) * float(input2)
-                calculation = f"{float(input1)} + {float(input2)} = {result}"
+                calculation = f"{float(input1)} * {float(input2)} = {result}"
             elif values["spin"] == "Divided by":
                 result = float(input1) / float(input2)
-                calculation = f"{float(input1)} + {float(input2)} = {result}"
+                calculation = f"{float(input1)} / {float(input2)} = {result}"
             else:
                 result = "A critical error occurred :("
             window["result"].update(f"Result: {result}")
@@ -53,6 +54,16 @@ while True:
                 his2 = his1
                 window["history1"].update(f"{calculation}")
                 his1 = calculation
+            if his1 != "Empty":
+                window["history1"].update(text_color=("black"))
+            if his2 != "Empty":
+                window["history2"].update(text_color=("black"))
+            if his3 != "Empty":
+                window["history3"].update(text_color=("black"))
+            if his4 != "Empty":
+                window["history4"].update(text_color=("black"))
+            if his5 != "Empty":
+                window["history5"].update(text_color=("black"))
         except ValueError:
             window["result"].update("Result: Please enter valid numbers")
 
