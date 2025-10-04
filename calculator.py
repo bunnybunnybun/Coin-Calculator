@@ -1,9 +1,10 @@
 import FreeSimpleGUI as sg
 
 layout = [
-    [sg.Text("Calculate how many coins ya have with this calculator, so that you don't have to use your brain!", font="default 11", text_color=('black'), background_color='#FFFFFF')],
-    [sg.Input(key = "input1", size=15), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], key = "spin"), sg.Input( key = "input2", size=15)],
-    [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", text_color=('black'), background_color=('white'), key = "result")],
+    [sg.Text("Calculate how many coins ya have with this calculator + currency converter, so that you don't have to use your brain!", font="default 11", text_color=('black'), background_color='#FFFFFF')],
+    [sg.Text("Calculator:                                                                 ", text_color=("black"), background_color=("white")), sg.Text(" Currency converter:", text_color=("black"), background_color=("white"))],
+    [sg.Input(key = "input1", size=15), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], key = "spin"), sg.Input( key = "input2", size=15), sg.Text("          ", background_color=("white")), sg.Input(key="cinput", size=30), sg.Spin(["USD", "CAD", "EUR"], key="ctype1"), sg.Text("to:", font=("default 11"), text_color=("black"), background_color=("white")), sg.Spin(["USD", "CAD", "EUR"], key="ctype2")],
+    [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", text_color=('black'), background_color=('white'), key = "result"), sg.Text("                                       ", background_color=("white")), sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "convcalculate"), sg.Text("Result:", font="default 11", text_color=('black'), background_color=('white'), key = "convresult")],
     [sg.Text("History:", font="default 11", text_color=("black"), background_color=("white"))],
     [sg.Text("Do a calculation for it to show up in your history!", size=45, text_color=("grey"), background_color=("#ebebeb"), key = "history1")],
     [sg.Text("Empty", background_color=("#ebebeb"), text_color="grey", size=45, key = "history2")],
@@ -23,6 +24,33 @@ his5 = "Empty"
 
 while True:
     event, values = window.read()
+    #f"{float(values["cinput"]) * 1.3967}"
+    if event == "convcalculate":
+        ctype1 = str(values["ctype1"])
+        ctype2 = str(values["ctype2"])
+        try:
+            if ctype1 == "USD" and ctype2 == "USD":
+                window["convresult"].update(f"{float(values["cinput"])}")
+            elif ctype1 == "USD" and ctype2 == "CAD":
+                window["convresult"].update(f"{float(values["cinput"]) * 1.3967}")
+            elif ctype1 == "CAD" and ctype2 == "CAD":
+                window["convresult"].update(f"{float(values["cinput"])}")
+            elif ctype1 == "CAD" and ctype2 == "USD":
+                window["convresult"].update(f"{float(values["cinput"]) * 0.7160}")
+            elif ctype1 == "USD" and ctype2 == "EUR":
+                window["convresult"].update(f"{float(values["cinput"]) * 0.8520}")
+            elif ctype1 == "EUR" and ctype2 == "USD":
+                window["convresult"].update(f"{float(values["cinput"]) * 1.1738}")
+            elif ctype1 == "CAD" and ctype2 == "EUR":
+                window["convresult"].update(f"{float(values["cinput"]) * 0.6100}")
+            elif ctype1 == "EUR" and ctype2 == "CAD":
+                window["convresult"].update(f"{float(values["cinput"]) * 1.6393}")
+            elif ctype1 == "EUR" and ctype2 == "EUR":
+                window["convresult"].update(f"{float(values["cinput"])}")
+            else:
+                window["convresult"].update("A critical error has occurred :(")
+        except ValueError:
+            window["convresult"].update("Result: Please enter valid numbers")
 
     if event == "calculate":
         try:
@@ -41,9 +69,9 @@ while True:
                 result = float(input1) / float(input2)
                 calculation = f"{float(input1)} / {float(input2)} = {result}"
             else:
-                result = "A critical error occurred :("
+                result = "A critical error has occurred :("
             window["result"].update(f"Result: {result}")
-            if result != "A critical error occurred :(":
+            if result != "A critical error has occurred :(":
                 window["history5"].update(f"{his4}")
                 his5 = his4
                 window["history4"].update(f"{his3}")
