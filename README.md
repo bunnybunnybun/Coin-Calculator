@@ -7,4 +7,4 @@ Also a currency converter! Currently supports converting between USD, CAD and EU
 FreeSimpleGUI, https://github.com/spyoungtech/FreeSimpleGUI
 
 # Disclaimer!!
-The converter may not be 100% accurate! The conversion rates are based off of what the data from exchange-rates.org said at the time of coding the application, (2025/10/04). Use this ONLY to get a general gist of what different currencies are like. if you need something more accurate, a web search will server you better :)
+The converter may not be 100% accurate! The conversion rates are based off of what the data from exchange-rates.org said at the time of coding the application, (2025/10/04). Use this ONLY to get a general gist of what different currencies are like. if you need something more accurate, a web search will serve you better :)
