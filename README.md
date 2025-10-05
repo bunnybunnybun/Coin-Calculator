@@ -5,6 +5,7 @@ A calculator! How fun! Intended for people like me who don't want to use their b
  - Simple calculator, able to do addition, subtraction, multiplication and division.
  - Currency converter that can convert between USD, CAD and EUR. (more may be added soon)
  - History; shows the last 5 calculations you have done, whether it was done with the calculator or the converter.
+ - Extended history; a button that opens a new window showing the last 20 calculations you have done, rather than the last 5.
  - Dark and light modes.
 
 ## Dependencies:
