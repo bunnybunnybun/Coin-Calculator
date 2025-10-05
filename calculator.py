@@ -43,7 +43,7 @@ def create_layout2():
         [sg.Text("", text_color="grey", size=100, key = "history3")],
         [sg.Text("", text_color="grey", size=100, key = "history4")],
         [sg.Text("", text_color="grey", size=100, key = "history5")],
-        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=77), sg.Button("Dark mode", font="default 10 bold", key="mode2")]
+        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=31), sg.Button("Close", button_color=("red", "#d9d9d9"), font=("default 11 bold"), key="close"), sg.Text(size=31), sg.Button("Dark mode", font="default 10 bold", key="mode2")]
     ]
 
 def create_layout1():
@@ -58,7 +58,7 @@ def create_layout1():
         [sg.Text("", text_color="grey", size=100, key = "history3")],
         [sg.Text("", text_color="grey", size=100, key = "history4")],
         [sg.Text("", text_color="grey", size=100, key = "history5")],
-        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=77), sg.Button("Light mode", font="default 10 bold", key="mode1")]
+        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=31), sg.Button("Close", button_color=("red", "black"), font=("default 11 bold"), key="close"), sg.Text(size=31), sg.Button("Light mode", font="default 10 bold", key="mode1")]
     ]
 
 window = sg.Window('Coin Calculator/Converter', create_layout1())
@@ -90,6 +90,9 @@ his20 = "Empty"
 
 while True:
     event, values = window.read()
+
+    if event == "close":
+        break
 
     if event == "backtocalc":
         window.close()
