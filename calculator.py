@@ -3,23 +3,40 @@ import os
 
 script_dir = os.path.dirname(__file__)
 image_path = os.path.join(script_dir, "coin.png")
+image2_path = os.path.join(script_dir, "coin2.png")
 sg.theme('NeonBlue1')
 
-layout = [
-    [sg.Text("Calculate how many coins ya have with this calculator + currency converter, so that you don't have to use your brain!", font="default 11")],
-    [sg.Text("Calculator:                                                                                      "), sg.Text(" Currency converter:")],
-    [sg.Input(key = "input1", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image_path), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], size=10, key = "spin"), sg.Input( key = "input2", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image_path), sg.Text(""), sg.Input(key="cinput", size=30), sg.Spin(["USD", "CAD", "EUR"], key="ctype1"), sg.Text("to:", font=("default 11")), sg.Spin(["USD", "CAD", "EUR"], key="ctype2")],
-    [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", size=37, key = "result"), sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "convcalculate"), sg.Text("Result:", font="default 11", key = "convresult")],
-    [sg.Text("History:", font="default 11")],
-    [sg.Text("Do a calculation for it to show up in your history!", size=45, text_color=("grey"), key = "history1")],
-    [sg.Text("Empty", text_color="grey", size=45, key = "history2")],
-    [sg.Text("Empty", text_color="grey", size=45, key = "history3")],
-    [sg.Text("Empty", text_color="grey", size=45, key = "history4")],
-    [sg.Text("Empty", text_color="grey", size=45, key = "history5")]
-]
+def create_layout2():
+    return [
+        [sg.Text("Calculate how many coins ya have with this calculator + currency converter, so that you don't have to use your brain!", font="default 11")],
+        [sg.Text("Calculator:                                                                                      "), sg.Text(" Currency converter:")],
+        [sg.Input(key = "input1", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image2_path), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], size=10, key = "spin"), sg.Input( key = "input2", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image2_path), sg.Text(""), sg.Input(key="cinput", size=30), sg.Spin(["USD", "CAD", "EUR"], key="ctype1"), sg.Text("to:", font=("default 11")), sg.Spin(["USD", "CAD", "EUR"], key="ctype2")],
+        [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", size=37, key = "result"), sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "convcalculate"), sg.Text("Result:", font="default 11", key = "convresult")],
+        [sg.Text("History:", font="default 11")],
+        [sg.Text("Do a calculation for it to show up in your history!", size=45, text_color=("grey"), key = "history1")],
+        [sg.Text("", text_color="grey", size=100, key = "history2")],
+        [sg.Text("", text_color="grey", size=100, key = "history3")],
+        [sg.Text("", text_color="grey", size=100, key = "history4")],
+        [sg.Text("", text_color="grey", size=100, key = "history5"), sg.Button("Dark mode", font="default 10 bold", key="mode2")]
+    ]
 
-window = sg.Window('Calculator', layout)
+def create_layout1():
+    return [
+        [sg.Text("Calculate how many coins ya have with this calculator + currency converter, so that you don't have to use your brain!", font="default 11")],
+        [sg.Text("Calculator:                                                                                      "), sg.Text(" Currency converter:")],
+        [sg.Input(key = "input1", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image_path), sg.Spin(['Plus', 'Minus', 'Multiplied by', 'Divided by'], size=10, key = "spin"), sg.Input( key = "input2", size=15), sg.Image(background_color="white", zoom=2, size=(30, 30), source=image_path), sg.Text(""), sg.Input(key="cinput", size=30), sg.Spin(["USD", "CAD", "EUR"], key="ctype1"), sg.Text("to:", font=("default 11")), sg.Spin(["USD", "CAD", "EUR"], key="ctype2")],
+        [sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "calculate"), sg.Text("Result:", font="default 11", size=37, key = "result"), sg.Button("Calculate!!!", button_color=('white','green'), font='default 11 bold', key = "convcalculate"), sg.Text("Result:", font="default 11", key = "convresult")],
+        [sg.Text("History:", font="default 11")],
+        [sg.Text("Do a calculation for it to show up in your history!", size=45, text_color=("grey"), key = "history1")],
+        [sg.Text("", text_color="grey", size=100, key = "history2")],
+        [sg.Text("", text_color="grey", size=100, key = "history3")],
+        [sg.Text("", text_color="grey", size=100, key = "history4")],
+        [sg.Text("", text_color="grey", size=100, key = "history5"), sg.Button("Light mode", font="default 10 bold", key="mode1")]
+    ]
 
+window = sg.Window('Calculator', create_layout1())
+
+currentmode = "dark"
 result = "AAAHHH"
 convresult = "AAAHHH"
 didcalculate = False
@@ -31,7 +48,19 @@ his5 = "Empty"
 
 while True:
     event, values = window.read()
-    #f"{float(values["cinput"]) * 1.3967}"
+
+    if event == "mode2":
+        currentmode = "dark"
+        window.close()
+        sg.theme('NeonBlue1')
+        window = sg.Window('Calculator', create_layout1())
+
+    if event == "mode1":
+        currentmode = "light"
+        window.close()
+        sg.theme('default1')
+        window = sg.Window('Calculator', create_layout2())
+
     if event == "convcalculate":
         didcalculate = True
         ctype1 = str(values["ctype1"])
@@ -108,16 +137,28 @@ while True:
         his2 = his1
         window["history1"].update(f"{calculation}")
         his1 = calculation
-        if his1 != "Empty":
-            window["history1"].update(text_color=("white"))
-        if his2 != "Empty":
-            window["history2"].update(text_color=("white"))
-        if his3 != "Empty":
-            window["history3"].update(text_color=("white"))
-        if his4 != "Empty":
-            window["history4"].update(text_color=("white"))
-        if his5 != "Empty":
-            window["history5"].update(text_color=("white"))
+        if currentmode == "light":
+            if his1 != "Empty":
+                window["history1"].update(text_color=("black"))
+            if his2 != "Empty":
+                window["history2"].update(text_color=("black"))
+            if his3 != "Empty":
+                window["history3"].update(text_color=("black"))
+            if his4 != "Empty":
+                window["history4"].update(text_color=("black"))
+            if his5 != "Empty":
+                window["history5"].update(text_color=("black"))
+        if currentmode == "dark":
+            if his1 != "Empty":
+                window["history1"].update(text_color=("white"))
+            if his2 != "Empty":
+                window["history2"].update(text_color=("white"))
+            if his3 != "Empty":
+                window["history3"].update(text_color=("white"))
+            if his4 != "Empty":
+                window["history4"].update(text_color=("white"))
+            if his5 != "Empty":
+                window["history5"].update(text_color=("white"))
 
     didcalculate = False
 
