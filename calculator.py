@@ -6,6 +6,31 @@ image_path = os.path.join(script_dir, "coin.png")
 image2_path = os.path.join(script_dir, "coin2.png")
 sg.theme('NeonBlue1')
 
+def create_layout3():
+    return[
+        [sg.Input(f"{his1}", size=70, key="ehis1")],
+        [sg.Input(f"{his2}", size=70, key="ehis2")],
+        [sg.Input(f"{his3}", size=70, key="ehis3")],
+        [sg.Input(f"{his4}", size=70, key="ehis4")],
+        [sg.Input(f"{his5}", size=70, key="ehis5")],
+        [sg.Input(f"{his6}", size=70, key="ehis6")],
+        [sg.Input(f"{his7}", size=70, key="ehis7")],
+        [sg.Input(f"{his8}", size=70, key="ehis8")],
+        [sg.Input(f"{his9}", size=70, key="ehis9")],
+        [sg.Input(f"{his10}", size=70, key="ehis10")],
+        [sg.Input(f"{his11}", size=70, key="ehis11")],
+        [sg.Input(f"{his12}", size=70, key="ehis12")],
+        [sg.Input(f"{his13}", size=70, key="ehis13")],
+        [sg.Input(f"{his14}", size=70, key="ehis14")],
+        [sg.Input(f"{his15}", size=70, key="ehis15")],
+        [sg.Input(f"{his16}", size=70, key="ehis16")],
+        [sg.Input(f"{his17}", size=70, key="ehis17")],
+        [sg.Input(f"{his18}", size=70, key="ehis18")],
+        [sg.Input(f"{his19}", size=70, key="ehis19")],
+        [sg.Input(f"{his20}", size=70, key="ehis20")],
+        [sg.Button("Back to calculator/converter", key="backtocalc")]
+    ]
+
 def create_layout2():
     return [
         [sg.Text("Calculate how many coins ya have with this calculator + currency converter, so that you don't have to use your brain!", font="default 11")],
@@ -17,7 +42,8 @@ def create_layout2():
         [sg.Text("", text_color="grey", size=100, key = "history2")],
         [sg.Text("", text_color="grey", size=100, key = "history3")],
         [sg.Text("", text_color="grey", size=100, key = "history4")],
-        [sg.Text("", text_color="grey", size=100, key = "history5"), sg.Button("Dark mode", font="default 10 bold", key="mode2")]
+        [sg.Text("", text_color="grey", size=100, key = "history5")],
+        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=77), sg.Button("Dark mode", font="default 10 bold", key="mode2")]
     ]
 
 def create_layout1():
@@ -31,10 +57,11 @@ def create_layout1():
         [sg.Text("", text_color="grey", size=100, key = "history2")],
         [sg.Text("", text_color="grey", size=100, key = "history3")],
         [sg.Text("", text_color="grey", size=100, key = "history4")],
-        [sg.Text("", text_color="grey", size=100, key = "history5"), sg.Button("Light mode", font="default 10 bold", key="mode1")]
+        [sg.Text("", text_color="grey", size=100, key = "history5")],
+        [sg.Button("Show extended history", key="extendedhistory"), sg.Text(size=77), sg.Button("Light mode", font="default 10 bold", key="mode1")]
     ]
 
-window = sg.Window('Calculator', create_layout1())
+window = sg.Window('Coin Calculator/Converter', create_layout1())
 
 currentmode = "dark"
 result = "AAAHHH"
@@ -45,9 +72,34 @@ his2 = "Empty"
 his3 = "Empty"
 his4 = "Empty"
 his5 = "Empty"
+his6 = "Empty"
+his7 = "Empty"
+his8 = "Empty"
+his9 = "Empty"
+his10 = "Empty"
+his11 = "Empty"
+his12 = "Empty"
+his13 = "Empty"
+his14 = "Empty"
+his15 = "Empty"
+his16 = "Empty"
+his17 = "Empty"
+his18 = "Empty"
+his19 = "Empty"
+his20 = "Empty"
 
 while True:
     event, values = window.read()
+
+    if event == "backtocalc":
+        window.close()
+        if currentmode == "dark":
+            window = sg.Window('Coin Calculator/Converter', create_layout1())
+        else:
+            window = sg.Window('Coin Calculator/Converter', create_layout2())
+    if event == "extendedhistory":
+        window.close()
+        window = sg.Window('Extended History', create_layout3())
 
     if event == "mode2":
         currentmode = "dark"
@@ -127,6 +179,21 @@ while True:
             didcalculate = False
 
     if result != "A critical error has occurred :(" and convresult != "A critical error has occurred :(" and didcalculate == True:
+        his20 = his19
+        his19 = his18
+        his18 = his17
+        his17 = his16
+        his16 = his15
+        his15 = his14
+        his14 = his13
+        his13 = his12
+        his12 = his11
+        his11 = his10
+        his10 = his9
+        his9 = his8
+        his8 = his7
+        his7 = his6
+        his6 = his5
         window["history5"].update(f"{his4}")
         his5 = his4
         window["history4"].update(f"{his3}")
