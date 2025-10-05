@@ -1,6 +1,10 @@
 # Coin-Calculator and currency converter
 A calculator! How fun! Intended for people like me who don't want to use their brains. Use it to calculate how many coins ya got! Also convert currencies with the currency converter!
 
+## Demo:
+To demo the app, you can either download the source code and the required dependency, and run it yourself, or, I have made a short video demom-ing the app if you would rather not download random files onto your device:
+
+
 ## Features:
  - Simple calculator, able to do addition, subtraction, multiplication and division.
  - Currency converter that can convert between USD, CAD and EUR. (more may be added soon)
