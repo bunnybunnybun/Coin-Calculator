@@ -2,7 +2,7 @@
 A calculator! How fun! Intended for people like me who don't want to use their brains. Use it to calculate how many coins ya got! Also convert currencies with the currency converter!
 
 ## Demo:
-To demo the app, you can either download the source code and the required dependency, and run it yourself, or, I have made a short video demom-ing the app if you would rather not download random files onto your device:
+You can either download it from PyPI by (I recommend doing this in a virtual environment, but I don't think it is required.) running this command: ```pip install currency-converter-and-calculator==0.2.0```, and then running ```calc``` to start the application. Or, I have made a short video demo-ing the app if you would rather not download random files onto your device:
 
 https://github.com/user-attachments/assets/e9b1c83a-08af-4d68-8d36-cee61b049908
 
